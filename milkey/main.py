@@ -14,6 +14,7 @@ APP_SIZE = (APP_WIDTH, APP_HEIGHT)
 BG_COLOR = (255, 255, 255)
 
 KEY_SEQ = 'wbwbwwbwbwbw'
+R_KBD_SEQ = 'zxcvasdfqwer'
 
 pygame.init()
 app = pygame.display.set_mode(APP_SIZE)
@@ -34,7 +35,7 @@ def quit():
     pygame.quit()
     sys.exit()
 
-matrix = [[] for i in range(NCOLS)]
+matrix = []
 keys = pygame.sprite.Group()
 
 for row in range(NROWS):
@@ -42,7 +43,7 @@ for row in range(NROWS):
         color = KEY_SEQ[NCOLS * row + col]
         key = Key(color)
         key.rect.topleft = (KEY_SIZE * col + 16, KEY_SIZE * (NROWS - 1 - row) + 16)
-        matrix[col].append(key)
+        matrix.append(key)
         keys.add(key)
 
 while True:
@@ -50,8 +51,19 @@ while True:
         if event.type == pygame.QUIT:
             quit()
         if event.type == pygame.KEYDOWN:
-            if event.key == ord('q'):
-                quit()
+            try:
+                keyid = R_KBD_SEQ.index(chr(event.key))
+            except ValueError:
+                continue
+            key = matrix[keyid]
+            key.image = key.down_img
+        if event.type == pygame.KEYUP:
+            try:
+                keyid = R_KBD_SEQ.index(chr(event.key))
+            except ValueError:
+                continue
+            key = matrix[keyid]
+            key.image = key.up_img
     app.fill(BG_COLOR)
     keys.draw(app)
     pygame.display.flip()
