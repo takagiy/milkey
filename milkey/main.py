@@ -34,6 +34,16 @@ class Key(pygame.sprite.Sprite):
         self.image = self.up_img
         self.rect = self.image.get_rect()
 
+def send_on(keyid):
+    noteid = keyid + noteoffset
+    message = mido.Message('note_on', note=noteid)
+    port.send(message)
+
+def send_off(keyid):
+    noteid = keyid + noteoffset
+    message = mido.Message('note_off', note=noteid)
+    port.send(message)
+
 def quit():
     pygame.quit()
     sys.exit()
@@ -67,6 +77,7 @@ while True:
                 keyid = R_KBD_SEQ.index(chr(event.key))
             except ValueError:
                 continue
+            send_on(keyid)
             key = matrix[keyid]
             key.image = key.down_img
         if event.type == pygame.KEYUP:
@@ -74,6 +85,7 @@ while True:
                 keyid = R_KBD_SEQ.index(chr(event.key))
             except ValueError:
                 continue
+            send_off(keyid)
             key = matrix[keyid]
             key.image = key.up_img
     app.fill(BG_COLOR)
