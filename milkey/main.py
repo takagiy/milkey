@@ -17,6 +17,7 @@ KEY_SEQ = 'wbwbwwbwbwbw'
 R_KBD_SEQ = 'zxcvasdfqwer'
 
 pygame.init()
+pygame.display.set_caption('milkey')
 app = pygame.display.set_mode(APP_SIZE)
 
 def load_image(source):
