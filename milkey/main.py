@@ -2,13 +2,13 @@ import pygame
 import sys
 from os import path
 
-KEY_SPRITE_SIZE = 256
+KEY_SIZE = 128
 
 NCOLS = 4
 NROWS = 3
 
-APP_WIDTH = KEY_SPRITE_SIZE * NCOLS + 32
-APP_HEIGHT = KEY_SPRITE_SIZE * NROWS + 32
+APP_WIDTH = KEY_SIZE * NCOLS + 32
+APP_HEIGHT = KEY_SIZE * NROWS + 32
 APP_SIZE = (APP_WIDTH, APP_HEIGHT)
 
 BG_COLOR = (255, 255, 255)
@@ -37,7 +37,7 @@ keys = pygame.sprite.Group()
 for col in range(NCOLS):
     for row in range(NROWS):
         key = Key()
-        key.rect.topleft = (256 * col + 16, 256 * row + 16)
+        key.rect.topleft = (KEY_SIZE * col + 16, KEY_SIZE * row + 16)
         keys.add(key)
 
 while True:
