@@ -1,4 +1,5 @@
 import pygame
+import mido
 import sys
 from os import path
 
@@ -16,12 +17,13 @@ BG_COLOR = (255, 255, 255)
 KEY_SEQ = 'wbwbwwbwbwbw'
 R_KBD_SEQ = 'zxcvasdfqwer'
 
-pygame.init()
-pygame.display.set_caption('milkey')
-app = pygame.display.set_mode(APP_SIZE)
+PORT_NAME = 'loopMIDI Port 1'
+
+def load_image_raw(source):
+    return pygame.image.load(path.join('images', source))
 
 def load_image(source):
-    return pygame.image.load(path.join('images', source)).convert_alpha()
+    return load_image_raw(source).convert_alpha()
 
 class Key(pygame.sprite.Sprite):
     def __init__(self, c):
@@ -35,6 +37,15 @@ class Key(pygame.sprite.Sprite):
 def quit():
     pygame.quit()
     sys.exit()
+
+pygame.init()
+pygame.display.set_caption('milkey')
+pygame.display.set_icon(load_image_raw('icon.png'))
+app = pygame.display.set_mode(APP_SIZE)
+
+port = mido.open_output(PORT_NAME)
+
+noteoffset = 60
 
 matrix = []
 keys = pygame.sprite.Group()
