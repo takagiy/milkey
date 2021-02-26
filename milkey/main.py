@@ -7,8 +7,8 @@ KEY_SIZE = 128
 NCOLS = 4
 NROWS = 3
 
-APP_WIDTH = KEY_SIZE * NCOLS + 16
-APP_HEIGHT = KEY_SIZE * NROWS + 16
+APP_WIDTH = KEY_SIZE * NCOLS + 8
+APP_HEIGHT = KEY_SIZE * NROWS + 8
 APP_SIZE = (APP_WIDTH, APP_HEIGHT)
 
 BG_COLOR = (255, 255, 255)
@@ -43,7 +43,7 @@ for row in range(NROWS):
     for col in range(NCOLS):
         color = KEY_SEQ[NCOLS * row + col]
         key = Key(color)
-        key.rect.topleft = (KEY_SIZE * col + 16, KEY_SIZE * (NROWS - 1 - row) + 16)
+        key.rect.topleft = (KEY_SIZE * col + 8, KEY_SIZE * (NROWS - 1 - row) + 8)
         matrix.append(key)
         keys.add(key)
 
