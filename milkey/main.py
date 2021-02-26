@@ -6,7 +6,7 @@ from os import path
 KEY_SIZE = 128
 
 NCOLS = 4
-NROWS = 3
+NROWS = 4
 
 APP_WIDTH = KEY_SIZE * NCOLS + 8
 APP_HEIGHT = KEY_SIZE * NROWS + 8
@@ -14,8 +14,8 @@ APP_SIZE = (APP_WIDTH, APP_HEIGHT)
 
 BG_COLOR = (255, 255, 255)
 
-KEY_SEQ = 'wbwbwwbwbwbw'
-R_KBD_SEQ = 'zxcvasdfqwer'
+KEY_SEQ = 'wbwbwwbwbwbwwbwbw'
+R_KBD_SEQ = 'zxcvasdfqwer1234'
 
 PORT_NAME = 'loopMIDI Port 1'
 
