@@ -130,8 +130,8 @@ for row in range(NROWS):
             matrix.append(key)
             keys.add(key)
 
-process_rpressed(ord('n'))
-process_rreleased(ord('n'))
+process_rpressed(ord(R_KBD_SEQ[0]))
+process_rreleased(ord(R_KBD_SEQ[0]))
 
 while True:
     for event in pygame.event.get():
