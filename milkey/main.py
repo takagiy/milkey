@@ -56,6 +56,8 @@ def process_lpressed(key):
         return
     for chord in chordoffsets:
         send_on(keyid + chord)
+    global lpressedkey
+    lpressedkey = keyid
     key = lmatrix[keyid]
     key.image = key.down_img
 
@@ -66,6 +68,8 @@ def process_lreleased(key):
         return
     for chord in chordoffsets:
         send_off(keyid + chord)
+    global lpressedkey
+    lpressedkey = None
     key = lmatrix[keyid]
     key.image = key.up_img
 
@@ -76,6 +80,8 @@ def process_rpressed(key):
         return
     if not rpressedkeys:
         for _keyid in chordoffsets:
+            if lpressedkey != None:
+                send_off(lpressedkey + _keyid)
             key = rmatrix[_keyid]
             key.image = key.up_img
         chordoffsets.clear()
@@ -106,6 +112,7 @@ port = mido.open_output(PORT_NAME)
 noteoffset = 60
 chordoffsets = []
 
+lpressedkey = None
 rpressedkeys = []
 
 lmatrix = []
