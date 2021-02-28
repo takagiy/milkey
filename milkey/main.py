@@ -20,7 +20,7 @@ BG_COLOR = (255, 255, 255)
 
 KEY_SEQ = 'wbwbwwbwbwbwwbwbw'
 L_KBD_SEQ = 'zxcvasdfqwer1234'
-R_KBD_SEQ = 'nm,.jkl;iop[90-='
+R_KBD_SEQ = 'm,./jkl;uiop7890'
 
 PORT_NAME = 'loopMIDI Port 1'
 
