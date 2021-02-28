@@ -114,11 +114,11 @@ while True:
         if event.type == pygame.QUIT:
             quit()
         if event.type == pygame.KEYDOWN:
-            process_lpressed(chr(event.key))
-            process_rpressed(chr(event.key))
+            process_lpressed(event.key)
+            process_rpressed(event.key)
         if event.type == pygame.KEYUP:
-            process_lreleased(chr(event.key))
-            process_rreleased(chr(event.key))
+            process_lreleased(event.key)
+            process_rreleased(event.key)
     app.fill(BG_COLOR)
     keys.draw(app)
     pygame.display.flip()
