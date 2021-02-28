@@ -51,7 +51,7 @@ def send_off(keyid):
 
 def process_lpressed(key):
     try:
-        keyid = L_KBD_SEQ.index(chr(event.key))
+        keyid = L_KBD_SEQ.index(chr(key))
     except ValueError:
         return
     send_on(keyid)
@@ -60,7 +60,7 @@ def process_lpressed(key):
 
 def process_lreleased(key):
     try:
-        keyid = L_KBD_SEQ.index(chr(event.key))
+        keyid = L_KBD_SEQ.index(chr(key))
     except ValueError:
         return
     send_off(keyid)
@@ -69,19 +69,26 @@ def process_lreleased(key):
 
 def process_rpressed(key):
     try:
-        keyid = R_KBD_SEQ.index(chr(event.key))
+        keyid = R_KBD_SEQ.index(chr(key))
     except ValueError:
         return
+    if not rpressedkeys:
+        for _keyid in chordoffsets:
+            key = rmatrix[_keyid]
+            key.image = key.up_img
+        chordoffsets.clear()
+    chordoffsets.append(keyid)
+    rpressedkeys.append(keyid)
     key = rmatrix[keyid]
     key.image = key.down_img
 
 def process_rreleased(key):
     try:
-        keyid = R_KBD_SEQ.index(chr(event.key))
+        keyid = R_KBD_SEQ.index(chr(key))
     except ValueError:
         return
+    rpressedkeys.remove(keyid)
     key = rmatrix[keyid]
-    key.image = key.up_img
 
 def quit():
     pygame.quit()
@@ -95,6 +102,9 @@ app = pygame.display.set_mode(APP_SIZE)
 port = mido.open_output(PORT_NAME)
 
 noteoffset = 60
+chordoffsets = []
+
+rpressedkeys = []
 
 lmatrix = []
 rmatrix = []
@@ -108,6 +118,9 @@ for row in range(NROWS):
             key.rect.topleft = (KEY_SIZE * col + 8 + xoffset, KEY_SIZE * (NROWS - 1 - row) + 8)
             matrix.append(key)
             keys.add(key)
+
+process_rpressed(ord('n'))
+process_rreleased(ord('n'))
 
 while True:
     for event in pygame.event.get():
