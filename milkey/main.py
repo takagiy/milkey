@@ -44,6 +44,24 @@ def send_off(keyid):
     message = mido.Message('note_off', note=noteid)
     port.send(message)
 
+def process_lpressed(key):
+    try:
+        keyid = L_KBD_SEQ.index(chr(event.key))
+    except ValueError:
+        return
+    send_on(keyid)
+    key = matrix[keyid]
+    key.image = key.down_img
+
+def process_lreleased(key):
+    try:
+        keyid = L_KBD_SEQ.index(chr(event.key))
+    except ValueError:
+        return
+    send_off(keyid)
+    key = matrix[keyid]
+    key.image = key.up_img
+
 def quit():
     pygame.quit()
     sys.exit()
@@ -73,21 +91,9 @@ while True:
         if event.type == pygame.QUIT:
             quit()
         if event.type == pygame.KEYDOWN:
-            try:
-                keyid = L_KBD_SEQ.index(chr(event.key))
-            except ValueError:
-                continue
-            send_on(keyid)
-            key = matrix[keyid]
-            key.image = key.down_img
+            process_lpressed(chr(event.key))
         if event.type == pygame.KEYUP:
-            try:
-                keyid = L_KBD_SEQ.index(chr(event.key))
-            except ValueError:
-                continue
-            send_off(keyid)
-            key = matrix[keyid]
-            key.image = key.up_img
+            process_lreleased(chr(event.key))
     app.fill(BG_COLOR)
     keys.draw(app)
     pygame.display.flip()
