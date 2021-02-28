@@ -15,7 +15,7 @@ APP_SIZE = (APP_WIDTH, APP_HEIGHT)
 BG_COLOR = (255, 255, 255)
 
 KEY_SEQ = 'wbwbwwbwbwbwwbwbw'
-R_KBD_SEQ = 'zxcvasdfqwer1234'
+L_KBD_SEQ = 'zxcvasdfqwer1234'
 
 PORT_NAME = 'loopMIDI Port 1'
 
@@ -74,7 +74,7 @@ while True:
             quit()
         if event.type == pygame.KEYDOWN:
             try:
-                keyid = R_KBD_SEQ.index(chr(event.key))
+                keyid = L_KBD_SEQ.index(chr(event.key))
             except ValueError:
                 continue
             send_on(keyid)
@@ -82,7 +82,7 @@ while True:
             key.image = key.down_img
         if event.type == pygame.KEYUP:
             try:
-                keyid = R_KBD_SEQ.index(chr(event.key))
+                keyid = L_KBD_SEQ.index(chr(event.key))
             except ValueError:
                 continue
             send_off(keyid)
