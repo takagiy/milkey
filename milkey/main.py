@@ -65,7 +65,7 @@ def process_lreleased(key):
     except ValueError:
         return
     for chord in chordoffsets:
-        send_off(keyid)
+        send_off(keyid + chord)
     key = lmatrix[keyid]
     key.image = key.up_img
 
