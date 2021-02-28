@@ -85,6 +85,8 @@ def process_rpressed(key):
             key = rmatrix[_keyid]
             key.image = key.up_img
         chordoffsets.clear()
+    if lpressedkey != None:
+        send_on(lpressedkey + keyid)
     chordoffsets.append(keyid)
     rpressedkeys.append(keyid)
     key = rmatrix[keyid]
