@@ -54,7 +54,8 @@ def process_lpressed(key):
         keyid = L_KBD_SEQ.index(chr(key))
     except ValueError:
         return
-    send_on(keyid)
+    for chord in chordoffsets:
+        send_on(keyid + chord)
     key = lmatrix[keyid]
     key.image = key.down_img
 
@@ -63,7 +64,8 @@ def process_lreleased(key):
         keyid = L_KBD_SEQ.index(chr(key))
     except ValueError:
         return
-    send_off(keyid)
+    for chord in chordoffsets:
+        send_off(keyid)
     key = lmatrix[keyid]
     key.image = key.up_img
 
